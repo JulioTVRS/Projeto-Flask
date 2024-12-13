@@ -3,9 +3,12 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import Session
 from sqlalchemy import Column, Integer, String
+import os
 
+basedir = os.path.abspath(os.path.dirname(__file__))
+db_path = os.path.join(basedir, 'db.sqlite3')
 
-engine = create_engine('sqlite:///db.sqlite3', echo=True)
+engine = create_engine(f'sqlite:///{db_path}', echo=True)
 session = Session(bind=engine)
 
 Base = declarative_base()
